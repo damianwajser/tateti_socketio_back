@@ -10,7 +10,7 @@ var server = http.createServer(app);
 app.use(morgan('dev'));
 
 //creo la carpeta para contenido estatico
-app.use("static", express.static("public"));
+app.use("/static", express.static("public"));
 
 //seteo los cors para todos los servicios
 app.all("*", cors());
