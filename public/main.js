@@ -29,9 +29,13 @@
   }
   function jugar(elemento){
     var letter = juego ? "X":"O";
-    juego = !juego;
     elemento.innerHTML = letter;
   }
   build_cat();
   var socket = io();
+  socket.on("connect", function(){
+    socket.on("init", function(data){
+      juego = data.figure;
+    })
+  });
 })();
