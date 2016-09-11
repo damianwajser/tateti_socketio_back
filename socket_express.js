@@ -11,6 +11,11 @@ io.on("connection", function(socket){
   //se envia con la clave init
   socket.emit("init", {"figure":figure});
   figure = !figure;
+  console.log("devolvi figure:" + figure);
+
+  socket.on("movimiento", function(data){
+    console.log(data);
+  });
 });
 
 app.io=io;

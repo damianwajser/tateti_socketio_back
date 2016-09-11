@@ -5,8 +5,6 @@
       return document.querySelector(selector);
   }
 
-  var juego = false;
-
   function build_cat(){
       for(var i=0; i<9; i++){
           var item = build_item(i);
@@ -16,26 +14,21 @@
   }
 
   function build_item(i){
-      return "<div class='cat-element col-md-4' id='elemento-'"+i+"></div>";
+      return "<div class='cat-element col-md-4' id='elemento-"+i+"'></div>";
   }
 
   function add_events() {
     var elements = document.querySelectorAll(".cat-element");
     for (var i = 0; i< elements.length; i++){
       elements[i].addEventListener("click", function(){
-        jugar(this);
+        var position = this.id.split("-")[1];
+        socket.play(position);
       });
     }
   }
-  function jugar(elemento){
-    var letter = juego ? "X":"O";
-    elemento.innerHTML = letter;
-  }
   build_cat();
-  var socket = io();
-  socket.on("connect", function(){
-    socket.on("init", function(data){
-      juego = data.figure;
-    })
-  });
+  var movimiento = function (figura,position){
+    $("#elemento-"+position).innerHTML = figura;
+  }
+  var socket = new Socket(movimiento,2,3);
 })();
