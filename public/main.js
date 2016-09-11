@@ -10,7 +10,7 @@ function build_cat(){
 }
 
 function build_item(i){
-    return "<div class='cat-element col-xs-4'></div>";
+    return "<div class='cat-element col-md-4' id='elemento-'"+i+"></div>";
 }
 
 build_cat();
